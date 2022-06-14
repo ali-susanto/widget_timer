@@ -127,3 +127,13 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
          ),
        ],
      )
+        : ButtonWidget(
+         text: "Start Timer!",
+         color: Colors.black,
+         backgroundColor: Colors.white,
+         onClicked: (){
+           startTimer();
+         });
+
+  }
+}
