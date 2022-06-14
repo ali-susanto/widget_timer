@@ -30,3 +30,26 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
         duration = Duration());
     }
   }
+   void startTimer(){
+    timer = Timer.periodic(Duration(seconds: 1),(_) => addTime());
+  }
+
+  void addTime(){
+    final addSeconds = countDown ? -1 : 1;
+    setState(() {
+      final seconds = duration.inSeconds + addSeconds;
+      if (seconds < 0){
+        timer?.cancel();
+      } else{
+        duration = Duration(seconds: seconds);
+
+      }
+    });
+  }
+
+  void stopTimer({bool resets = true}){
+    if (resets){
+      reset();
+    }
+    setState(() => timer?.cancel());
+  }
