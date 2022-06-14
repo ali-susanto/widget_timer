@@ -106,3 +106,24 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
           Text(header,style: TextStyle(color: Colors.black45)),
         ],
       );
+   Widget buildButtons(){
+    final isRunning = timer == null? false: timer!.isActive;
+    final isCompleted = duration.inSeconds == 0;
+     return isRunning || isCompleted
+         ? Row(
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: [
+         ButtonWidget(
+             text:'STOP',
+             onClicked: (){
+               if (isRunning){
+                 stopTimer(resets: false);
+               }
+             }),
+         SizedBox(width: 12,),
+         ButtonWidget(
+             text: "CANCEL",
+             onClicked: stopTimer
+         ),
+       ],
+     )
