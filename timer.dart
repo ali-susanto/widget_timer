@@ -53,3 +53,38 @@ class _StopWatchTimerPageState extends State<StopWatchTimerPage> {
     }
     setState(() => timer?.cancel());
   }
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: Colors.orange[50],
+    appBar: AppBar(
+      automaticallyImplyLeading: false,
+      title: Text("Flutter StopWatch Timer Demo"),
+    ),
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildTime(),
+          SizedBox(height: 80,),
+          buildButtons()
+        ],
+      ),
+    ),
+  );
+
+  Widget buildTime(){
+    String twoDigits(int n) => n.toString().padLeft(2,'0');
+    final hours =twoDigits(duration.inHours);
+    final minutes =twoDigits(duration.inMinutes.remainder(60));
+    final seconds =twoDigits(duration.inSeconds.remainder(60));
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        buildTimeCard(time: hours, header:'HOURS'),
+        SizedBox(width: 8,),
+       buildTimeCard(time: minutes, header:'MINUTES'),
+       SizedBox(width: 8,),
+       buildTimeCard(time: seconds, header:'SECONDS'),
+    ]
+    );
+  }
